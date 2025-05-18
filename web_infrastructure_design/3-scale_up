@@ -1,0 +1,34 @@
+# Scale Up Web Infrastructure Design
+
+## Infrastructure Components
+
+### Added Elements
+1. **Additional Server**
+   - Purpose: Increase capacity and improve redundancy
+   - Hosts dedicated components (web server/application server/database)
+
+2. **HAProxy Load Balancer Cluster**
+   - Configuration: Active-active setup
+   - Features:
+     - Uses keepalived for failover
+     - Implements Round Robin distribution
+   - Benefits: Eliminates SPOF at load balancing layer
+
+3. **Component Separation Architecture**
+   | Component       | Quantity | Specification          |
+   |-----------------|----------|------------------------|
+   | Web Servers     | 2+       | Nginx                  |
+   | App Servers     | 2+       | Custom application     |
+   | Database        | 2+       | MySQL Primary-Replica  |
+
+## Infrastructure Diagram
+
+```mermaid
+graph TD
+    U[User] --> LB[HAProxy Cluster]
+    LB --> WS1[Web Server 1]
+    LB --> WS2[Web Server 2]
+    WS1 --> AS1[App Server 1]
+    WS2 --> AS2[App Server 2]
+    AS1 --> DB1[(Primary DB)]
+    AS2 --> DB2[(Replica DB)]
