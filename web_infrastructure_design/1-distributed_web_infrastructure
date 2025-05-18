@@ -1,0 +1,53 @@
+## Infrastructure Components
+
+### 1. Load Balancer (HAProxy)
+
+- **Purpose**: Distributes incoming traffic across multiple servers to ensure no single server becomes overwhelmed.
+- **Distribution Algorithm**: Round-robin, which distributes client requests evenly across the servers.
+- **Setup**: Active-Active, where both servers are actively handling traffic. This setup provides better load distribution and redundancy compared to Active-Passive, where one server is on standby.
+
+### 2. Web Server (Nginx)
+
+- **Purpose**: Handles HTTP requests, serves static content, and forwards dynamic requests to the application server.
+- **Setup**: Configured to serve static files and act as a reverse proxy to the application server.
+
+### 3. Application Server
+
+- **Purpose**: Runs the application code and processes dynamic requests.
+- **Setup**: Hosts the application files and communicates with the database server to fetch or store data.
+
+### 4. Database Server (MySQL)
+
+- **Purpose**: Stores and manages the application's data.
+- **Setup**: Configured as a Primary-Replica (Master-Slave) cluster to ensure data redundancy and high availability.
+
+## Specifics
+
+- **Primary-Replica Cluster**: The Primary node handles all write operations, while the Replica node handles read operations. This setup improves performance and provides data redundancy.
+- **SPOF (Single Points of Failure)**: The load balancer and database primary node are potential SPOFs. If either fails, the entire system could be affected.
+
+## Security Issues
+
+- **No firewall**: The infrastructure is vulnerable to unauthorized access.
+- **No HTTPS**: Data transmitted between clients and servers is not encrypted, making it susceptible to interception.
+- **No Monitoring**: Without monitoring, it's challenging to detect and respond to issues in real-time.
+
+```
+    +-----------------+
+    |   Load Balancer |
+    |     (HAProxy)   |
+    +--------+--------+
+           |
+    +----------+----------+
+    |                     |
++---+---+           +-----+-----+
+| Web   |           | Application|
+| Server|           |   Server   |
+| (Nginx)|          +-----+------+
++-------+                |
+                 |
+            +------+------+
+            |   Database  |
+            |   (MySQL)   |
+            +-------------+
+```
