@@ -1,0 +1,33 @@
+## User Accessing the Website
+
+1. **User Request**: A user wants to access the website www.foobar.com.
+2. **DNS Resolution**: The user's browser sends a request to the DNS server to resolve the domain name www.foobar.com to an IP address.
+3. **DNS Response**: The DNS server responds with the IP address 8.8.8.8.
+4. **HTTP Request**: The user's browser sends an HTTP request to the IP address 8.8.8.8.
+
+## Infrastructure Components
+
+1. **Server**: A physical or virtual machine with the IP address 8.8.8.8.
+2. **Web Server (Nginx)**: Receives the HTTP request from the user's browser and forwards it to the application server.
+3. **Application Server**: Processes the request using the application files (codebase) and interacts with the database if needed.
+4. **Application Files (Codebase)**: The source code that builds the website.
+5. **Database (MySQL)**: Stores and manages the website's data.
+6. **Domain Name (foobar.com)**: Configured with a www record that points to the server's IP address 8.8.8.8.
+
+## Specifics about the Infrastructure
+
+- **Server**: A device, virtual device, or computer program that provides functionality for other programs or devices, called "clients."
+- **Role of the Domain Name**: Translates the human-readable domain name (www.foobar.com) into an IP address (8.8.8.8) that the browser can use to locate the server.
+- **Type of DNS Record**: The www record in www.foobar.com is a CNAME (Canonical Name) record that points to the server's IP address.
+- **Role of the Web Server**: Nginx receives HTTP requests from the user's browser and forwards them to the application server.
+- **Role of the Application Server**: Processes the requests using the application files and interacts with the database if needed.
+- **Role of the Database**: Stores and manages the website's data.
+- **Communication**: The server uses the HTTP protocol to communicate with the user's browser.
+
+## Issues with this Infrastructure
+
+- **Single Point of Failure (SPOF)**: If the single server fails, the entire website becomes unavailable.
+- **Downtime during Maintenance**: When deploying new code or restarting the web server, the website will experience downtime.
+- **Scalability**: The infrastructure cannot handle a large amount of incoming traffic, leading to performance issues.
+
+This setup is simple and cost-effective for small websites but has limitations in terms of reliability and scalability. For larger websites, a more robust infrastructure with load balancing, multiple servers, and redundancy would be necessary.
