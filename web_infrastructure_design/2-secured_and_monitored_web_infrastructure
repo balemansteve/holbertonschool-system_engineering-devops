@@ -1,0 +1,24 @@
+# Web Infrastructure Design for www.foobar.com
+
+## Components:
+1. **3 Web Servers**: Host website content and handle user requests.
+2. **3 Firewalls**: Protect each web server by filtering traffic.
+3. **1 Load Balancer**: Distributes traffic across web servers.
+4. **1 SSL Certificate**: Encrypts traffic between users and web servers.
+5. **3 Monitoring Clients**: Collect data for monitoring services.
+
+## Design:
+
+### Explanation of Components:
+- **Firewalls**: Protect web servers by filtering traffic, preventing unauthorized access.
+- **HTTPS Traffic**: SSL certificate encrypts data between users and web servers.
+- **Monitoring**: Collects performance and health data of web servers.
+- **Monitoring Data Collection**: Tracks CPU usage, memory usage, disk I/O, and network traffic.
+
+### Monitoring QPS:
+Configure monitoring clients to track web server requests over time. Visualize data in monitoring service dashboards.
+
+### Issues with the Infrastructure:
+- **SSL Termination at Load Balancer**: Traffic between load balancer and web servers is not encrypted.
+- **Single MySQL Server for Writes**: Creates a single point of failure and limits scalability.
+- **Homogeneous Servers**: Leads to resource contention and scaling difficulties.
